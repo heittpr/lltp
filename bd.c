@@ -127,3 +127,18 @@ float preco(int id) {
   executa_sql(sql, _preco, &ret);
   return ret;
 }
+
+// Lê o id de um produto
+int le_id() {
+  int id;
+
+  while (1) {
+    printf("Informe o id do produto: ");
+    scanf("%d", &id);
+
+    if (verifica_produto(id)) break;
+    else printf("Id inválido!\n");
+  }
+
+  return id;
+}
