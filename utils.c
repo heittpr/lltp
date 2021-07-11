@@ -14,7 +14,7 @@ void limpa_buffer() {
 // Espera que o usuário pressione alguma tecla
 void pausa() {
   limpa_buffer();
-  printf("\nPressione qualquer tecla para continuar...\n");
+  printf("\nPressione qualquer tecla para continuar...");
   getchar();
 }
 

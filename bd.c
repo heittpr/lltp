@@ -56,7 +56,7 @@ void inicializa_banco() {
 int cabecalho;
 
 // Callback para a função mostra produtos
-int _mostra_produtos(void *foo, int argc, char **argv, char **nomeColuna) {
+int _mostra_produtos(void *ponteiro, int argc, char **argv, char **nomeColuna) {
   int tamanhoColuna[3] = {3, 18, 10};
 
   // Imprime o cabeçalho
@@ -81,6 +81,24 @@ int _mostra_produtos(void *foo, int argc, char **argv, char **nomeColuna) {
 void mostra_produtos() {
   cabecalho = 0;
   executa_sql("SELECT * FROM Produto", _mostra_produtos, 0);
+}
+
+// Callback para a função verifica_produto
+int _verifica_produto(void *ponteiro, int argc, char **argv, char **nomeColuna) {
+  int *ret = (int *)ponteiro;
+  *ret = 1;
+  
+  return 0;
+}
+
+// Verifica se existe um produto com certo id
+int verifica_produto(int id) {
+  char sql[50];
+  sprintf(sql, "SELECT Id FROM Produto WHERE Id = %d", id);
+
+  int ret = 0;
+  executa_sql(sql, _verifica_produto, &ret);
+  return ret;
 }
 
 // Altera o preço de um produto
